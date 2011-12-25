@@ -14,4 +14,8 @@ Gem::Specification.new do |gem|
   gem.name          = "hogan_assets"
   gem.require_paths = ["lib"]
   gem.version       = HoganAssets::VERSION
+
+  gem.add_runtime_dependency "execjs", ">= 1.2.9"
+  gem.add_runtime_dependency "tilt", ">= 1.3.3"
+  gem.add_runtime_dependency "sprockets", ">= 2.0.3"
 end
