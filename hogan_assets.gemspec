@@ -6,7 +6,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["leshill@gmail.com"]
   gem.description   = %q{Use compiled hogan.js (mustache) JavaScript templates with sprockets and the Rails asset pipeline.}
   gem.summary       = %q{Use compiled hogan.js (mustache) JavaScript templates with sprockets and the Rails asset pipeline.}
-  gem.homepage      = ""
+  gem.homepage      = "https://github.com/leshill/hogan_assets"
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   gem.files         = `git ls-files`.split("\n")
