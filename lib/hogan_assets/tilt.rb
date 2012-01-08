@@ -11,7 +11,7 @@ module HoganAssets
       <<-TEMPLATE
         (function() {
           this.HoganTemplates || (this.HoganTemplates = {});
-          this.HoganTemplates[#{template_name}] = new HoganTemplate(#{code});
+          this.HoganTemplates[#{template_name}] = new Hogan.Template(#{code});
           this.HoganTemplates[#{template_name}].r = #{compiled_template};
           return HoganTemplates[#{template_name}];
         }).call(this);

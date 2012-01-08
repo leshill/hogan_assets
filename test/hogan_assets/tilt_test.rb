@@ -15,8 +15,8 @@ module HoganAssets
       assert_equal <<END_EXPECTED, template.render(scope, {})
         (function() {
           this.HoganTemplates || (this.HoganTemplates = {});
-          this.HoganTemplates["path/to/template"] = new HoganTemplate("This is {{mustache}}");
-          this.HoganTemplates["path/to/template"].r = function(cx,p){var c = [cx];var b = "";var _ = this;b += "This is ";b += (_.v(_.f("mustache",c,p,0)));return b;;};
+          this.HoganTemplates["path/to/template"] = new Hogan.Template("This is {{mustache}}");
+          this.HoganTemplates["path/to/template"].r = function(c,p,i){i = i || "";var b = i + "";var _ = this;b += "This is ";b += (_.v(_.f("mustache",c,p,0)));return b;;};
           return HoganTemplates["path/to/template"];
         }).call(this);
 END_EXPECTED
