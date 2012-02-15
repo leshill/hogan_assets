@@ -6,15 +6,10 @@ module HoganAssets
 
     def evaluate(scope, locals, &block)
       compiled_template = Hogan.compile(data)
-      code = data.inspect
       template_name = scope.logical_path.inspect
       <<-TEMPLATE
-        (function() {
-          this.HoganTemplates || (this.HoganTemplates = {});
-          this.HoganTemplates[#{template_name}] = new Hogan.Template(#{code});
-          this.HoganTemplates[#{template_name}].r = #{compiled_template};
-          return HoganTemplates[#{template_name}];
-        }).call(this);
+        this.HoganTemplates || (this.HoganTemplates = {});
+        this.HoganTemplates[#{template_name}] = new Hogan.Template(#{compiled_template});
       TEMPLATE
     end
 
