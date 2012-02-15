@@ -14,7 +14,7 @@ module HoganAssets
       template = HoganAssets::Tilt.new('/myapp/app/assets/templates/path/to/template.mustache') { "This is {{mustache}}" }
       assert_equal <<-END_EXPECTED, template.render(scope, {})
         this.HoganTemplates || (this.HoganTemplates = {});
-        this.HoganTemplates["path/to/template"] = new Hogan.Template(function(c,p,i){i = i || "";var b = i + "";var _ = this;b += "This is ";b += (_.v(_.f("mustache",c,p,0)));return b;;});
+        this.HoganTemplates[\"path/to/template\"] = new Hogan.Template(function(c,p,i){var _=this;_.b(i=i||\"\");_.b(\"This is \");_.b(_.v(_.f(\"mustache\",c,p,0)));return _.fl();;});
       END_EXPECTED
     end
   end
