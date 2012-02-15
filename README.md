@@ -55,6 +55,10 @@ Templates are compiled to a global JavaScript object named `HoganTemplates`. To 
 
 I made this because I <3 **mustache** and want to use it in Rails. Follow me on [Github](https://github.com/leshill) and [Twitter](https://twitter.com/leshill).
 
+# Contributors
+
+* Matthew Nelson (@mdavidn) : Remove unnecessary template source
+
 ## Contributing
 
 1. Fork it
