@@ -57,7 +57,8 @@ I made this because I <3 **mustache** and want to use it in Rails. Follow me on 
 
 # Contributors
 
-* Matthew Nelson (@mdavidn) : Remove unnecessary template source
+* Matthew Nelson (@mdavidn)     : Remove unnecessary template source
+* Jack Lawson    (@ajacksified) : Configurable file extension
 
 ## Contributing
 
