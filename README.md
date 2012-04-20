@@ -27,7 +27,7 @@ Require `hogan.js` somewhere in your JavaScript manifest, for example in `applic
 Locate your `.mustache` templates with your other JavaScript assets, usually in `app/assets/javascripts/templates`.
 Require your templates with `require_tree`:
 
-    //= require_tree templates
+    //= require_tree ./templates
 
 Templates are named for the sub-path below `require_tree`. For example, the file `app/assets/javascripts/templates/pages/person.mustache` will be named `pages/person`.
 
