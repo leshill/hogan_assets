@@ -29,7 +29,7 @@ Require your templates with `require_tree`:
 
     //= require_tree ./templates
 
-Templates are named for the sub-path below `require_tree`. For example, the file `app/assets/javascripts/templates/pages/person.mustache` will be named `pages/person`.
+Templates are named for the sub-path from your manifest with `require_tree`. For example, the file `app/assets/javascripts/templates/pages/person.mustache` will be named `templates/pages/person`. _(TODO: make this nicer)_
 
 ### Installation with sprockets
 
