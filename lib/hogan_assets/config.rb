@@ -15,7 +15,7 @@ module HoganAssets
     end
 
     def self.template_extensions
-      @template_extensions ||= ['mustache']
+      @template_extensions ||= ['mustache', 'hamstache']
     end
 
     def self.template_extensions=(value)

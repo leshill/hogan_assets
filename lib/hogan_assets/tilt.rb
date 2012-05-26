@@ -13,15 +13,13 @@ module HoganAssets
     end
 
     def evaluate(scope, locals, &block)
-
-require 'pry'
-binding.pry
-
-      compiled_template = Hogan.compile(data)
+      if scope.pathname.extname == '.hamstache'
+        compiled_template = Haml::Engine.new(data, @options).render unless data.nil?
+        compiled_template = Hogan.compile(compiled_template)
+      else
+        compiled_template = Hogan.compile(data)
+      end
       template_name = scope.logical_path.inspect
-      options = @options.merge(:filename => eval_file, :line => line)
-      Haml::Engine.new(compiled_template, options).render(scope)
-
       <<-TEMPLATE
         this.HoganTemplates || (this.HoganTemplates = {});
         this.HoganTemplates[#{template_name}] = new Hogan.Template(#{compiled_template});

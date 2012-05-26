@@ -5,7 +5,7 @@ require 'pathname'
 module HoganAssets
   class Hogan
     class << self
-      def compile(source)
+      def compile(source, options = {})
         context.eval("Hogan.compile(#{source.inspect}, {asString: true})")
       end
 
