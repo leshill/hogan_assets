@@ -14,7 +14,7 @@ module HoganAssets
 
     def evaluate(scope, locals, &block)
       if scope.pathname.extname == '.hamstache'
-        compiled_template = Haml::Engine.new(data, @options).render unless data.nil?
+        compiled_template = Haml::Engine.new(data, @options).render
         compiled_template = Hogan.compile(compiled_template)
       else
         compiled_template = Hogan.compile(data)
