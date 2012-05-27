@@ -1,24 +1,25 @@
 module HoganAssets
   # Change config options in an initializer:
   #
-  # HoganAssets.template_extension = 'mustache'
+  # HoganAssets::Config.template_extensions = ['mustache']
   #
   # Or in a block:
   #
-  # HoganAssets.configure do |config|
-  #   config.template_extension = 'mustache'
+  # HoganAssets::Config.configure do |config|
+  #   config.template_extensions = ['mustache']
   # end
 
   module Config
-    attr_accessor :template_base_path, :template_extension
-
-    def configure
+    def self.configure
       yield self
     end
 
-    def template_extension
-      @template_extension ||= 'mustache'
+    def self.template_extensions
+      @template_extensions ||= ['mustache', 'hamstache']
+    end
+
+    def self.template_extensions=(value)
+      @template_extensions = value
     end
   end
 end
-

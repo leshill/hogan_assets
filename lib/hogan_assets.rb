@@ -11,6 +11,8 @@ module HoganAssets
     require 'hogan_assets/engine'
   else
     require 'sprockets'
-    Sprockets.register_engine ".#{HoganAssets.template_extension}", Tilt
+    Config.template_extensions.each do |ext|
+      Sprockets.register_engine ".#{ext}", Tilt
+    end
   end
 end
