@@ -9,6 +9,8 @@ module HoganAssets
     def test_render
       scope = Class.new do
         def logical_path ; 'path/to/template' ; end
+
+        def pathname ; Pathname.new logical_path ; end
       end.new
 
       template = HoganAssets::Tilt.new('/myapp/app/assets/templates/path/to/template.mustache') { "This is {{mustache}}" }

@@ -10,16 +10,26 @@ module HoganAssets
   # end
 
   module Config
-    def self.configure
+    extend self
+
+    def configure
       yield self
     end
 
-    def self.template_extensions
-      @template_extensions ||= ['mustache', 'hamstache']
+    attr_accessor :allow_hamstache
+
+    attr_writer :template_extensions
+
+    def template_extensions
+      @template_extensions ||= if haml_available?
+                                 ['mustache', 'hamstache']
+                               else
+                                 ['mustache']
+                               end
     end
 
-    def self.template_extensions=(value)
-      @template_extensions = value
+    def haml_available?
+      defined? ::Haml::Engine
     end
   end
 end
