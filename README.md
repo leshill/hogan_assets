@@ -47,12 +47,12 @@ Require `hogan.js` somewhere in your JavaScript.
 
 ## Hamstache!
 
-_hamstache_ is the quite popular combination of `haml` and `mustache`, a more robust solution exists using [haml_assets](https://github.com/infbio/haml_assets), but if all you want is nicer markup, you need to take these two steps:
+_hamstache_ is the quite popular combination of `haml` and `mustache`, a more robust solution exists using [haml_assets](https://github.com/infbio/haml_assets), but if all you want is nicer markup, you need to take these two additional steps:
 
 Add this line to your `Gemfile`:
 
     group :assets do
-      gem 'hogan_assets'
+      gem 'haml'
     end
 
 And then execute:
