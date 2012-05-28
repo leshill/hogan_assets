@@ -71,8 +71,9 @@ I made this because I <3 **mustache** and want to use it in Rails. Follow me on 
 
 # Contributors
 
-* Matthew Nelson (@mdavidn)     : Remove unnecessary template source
-* Jack Lawson    (@ajacksified) : Configurable file extension
+* @mdavidn     (Matthew Nelson) : Remove unnecessary template source
+* @ajacksified (Jack Lawson)    : Configurable file extension
+* @mikesmullin (Mike Smullin)   : hamstache support
 
 ## Contributing
 
