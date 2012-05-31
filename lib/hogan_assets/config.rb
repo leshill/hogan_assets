@@ -16,8 +16,6 @@ module HoganAssets
       yield self
     end
 
-    attr_accessor :allow_hamstache
-
     attr_writer :template_extensions
 
     def template_extensions
