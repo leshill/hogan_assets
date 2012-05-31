@@ -63,7 +63,7 @@ And then execute:
 
 Templates are compiled to a global JavaScript object named `HoganTemplates`. To render `pages/person`:
 
-    HoganTemplates['pages/person'].render(context, partials);
+    HoganTemplates['templates/pages/person'].render(context, partials);
 
 # Author
 
