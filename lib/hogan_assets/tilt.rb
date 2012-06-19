@@ -11,17 +11,21 @@ module HoganAssets
     end
 
     def evaluate(scope, locals, &block)
+      text = data # Ugly, yes, but to not taint data variable
+
       if scope.pathname.extname == '.hamstache'
         raise "Unable to complile #{scope.pathname} because haml is not available. Did you add the haml gem?" unless HoganAssets::Config.haml_available?
-        compiled_template = Haml::Engine.new(data, @options).render
-        compiled_template = Hogan.compile(compiled_template)
+        text = Haml::Engine.new(data, @options).render
+        compiled_template = Hogan.compile(source)
       else
         compiled_template = Hogan.compile(data)
       end
+      
       template_name = scope.logical_path.inspect
+
       <<-TEMPLATE
         this.HoganTemplates || (this.HoganTemplates = {});
-        this.HoganTemplates[#{template_name}] = new Hogan.Template(#{compiled_template});
+        this.HoganTemplates[#{template_name}] = new Hogan.Template(#{compiled_template}, #{text.inspect}, Hogan, {});
       TEMPLATE
     end
 
