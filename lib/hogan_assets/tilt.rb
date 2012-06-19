@@ -20,7 +20,7 @@ module HoganAssets
       else
         compiled_template = Hogan.compile(data)
       end
-      
+
       template_name = scope.logical_path.inspect
 
       <<-TEMPLATE
