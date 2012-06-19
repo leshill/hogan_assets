@@ -69,6 +69,16 @@ And then execute:
       config.template_extensions = %w(mustache hamstache stache)
     end
 
+### Lambda Support
+
+**HoganAssets** supports **mustache** lambdas. Set the `lambda_support` option to true to enable lambdas for your templates. This will include the raw template text as part of the compiled template; each template will be correspondingly larger.
+
+*TODO* Should this be on by default?
+
+    HoganAssets::Config.configure do |config|
+      config.lambda_support = true
+    end
+
 ## Usage
 
 Templates are compiled to a global JavaScript object named `HoganTemplates`. To render `pages/person`:

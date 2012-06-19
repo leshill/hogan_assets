@@ -7,6 +7,7 @@ module HoganAssets
   #
   # HoganAssets::Config.configure do |config|
   #   config.template_extensions = ['mustache']
+  #   config.lambda_support = true
   # end
 
   module Config
@@ -16,7 +17,11 @@ module HoganAssets
       yield self
     end
 
-    attr_writer :template_extensions
+    attr_writer :lambda_support, :template_extensions
+
+    def lambda_support?
+      @lambda_support
+    end
 
     def template_extensions
       @template_extensions ||= if haml_available?
