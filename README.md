@@ -59,6 +59,16 @@ And then execute:
 
     $ bundle
 
+## Configuration
+
+### Template Extensions
+
+**HoganAssets** recognizes templates ending in `.mustache` and if you have haml available, `.hamstache`. You can change the template extensions by setting the `template_extensions` configuration option in an initializer:
+
+    HoganAssets::Config.configure do |config|
+      config.template_extensions = %w(mustache hamstache stache)
+    end
+
 ## Usage
 
 Templates are compiled to a global JavaScript object named `HoganTemplates`. To render `pages/person`:
