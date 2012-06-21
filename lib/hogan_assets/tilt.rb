@@ -16,7 +16,7 @@ module HoganAssets
       if scope.pathname.extname == '.hamstache'
         raise "Unable to complile #{scope.pathname} because haml is not available. Did you add the haml gem?" unless HoganAssets::Config.haml_available?
         text = Haml::Engine.new(data, @options).render
-        compiled_template = Hogan.compile(source)
+        compiled_template = Hogan.compile(text)
       else
         compiled_template = Hogan.compile(data)
       end
