@@ -1,0 +1,28 @@
+PATH
+  remote: .
+  specs:
+    hogan_assets (1.3.0)
+      execjs (>= 1.2.9)
+      sprockets (>= 2.0.3)
+      tilt (>= 1.3.3)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    execjs (1.4.0)
+      multi_json (~> 1.0)
+    hike (1.2.1)
+    multi_json (1.3.5)
+    rack (1.4.1)
+    sprockets (2.4.3)
+      hike (~> 1.2)
+      multi_json (~> 1.0)
+      rack (~> 1.0)
+      tilt (~> 1.1, != 1.3.0)
+    tilt (1.3.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  hogan_assets!
