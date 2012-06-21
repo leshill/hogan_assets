@@ -11,6 +11,7 @@ GEM
   specs:
     execjs (1.4.0)
       multi_json (~> 1.0)
+    haml (3.1.6)
     hike (1.2.1)
     multi_json (1.3.5)
     rack (1.4.1)
@@ -25,4 +26,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   hogan_assets!
