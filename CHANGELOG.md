@@ -1,6 +1,6 @@
 ## 1.3.2 (2012-08-04)
 
-* Use `HoganAssets::Config.path\_prefix` to strip a common path prefix from your template names
+* Use `HoganAssets::Config.path_prefix` to strip a common path prefix from your template names
 
 ## 1.3.1 (2012-06-21)
 
