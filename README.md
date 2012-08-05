@@ -29,7 +29,7 @@ Require your templates with `require_tree`:
 
     //= require_tree ./templates
 
-Templates are named for the sub-path from your manifest with `require_tree`. For example, the file `app/assets/javascripts/templates/pages/person.mustache` will be named `templates/pages/person`. _(TODO: make this nicer)_
+Templates are named for the sub-path from your manifest with `require_tree`. For example, the file `app/assets/javascripts/templates/pages/person.mustache` will be named `templates/pages/person`. See `path_prefix` below!
 
 ### Installation with sprockets
 
@@ -42,8 +42,6 @@ And then execute:
     $ bundle
 
 Require `hogan.js` somewhere in your JavaScript.
-
-*TODO* Templates?
 
 ## Hamstache!
 
@@ -61,22 +59,38 @@ And then execute:
 
 ## Configuration
 
-### Template Extensions
-
-**HoganAssets** recognizes templates ending in `.mustache` and if you have haml available, `.hamstache`. You can change the template extensions by setting the `template_extensions` configuration option in an initializer:
-
-    HoganAssets::Config.configure do |config|
-      config.template_extensions = %w(mustache hamstache stache)
-    end
-
 ### Lambda Support
 
-**HoganAssets** supports **mustache** lambdas. Set the `lambda_support` option to true to enable lambdas for your templates. This will include the raw template text as part of the compiled template; each template will be correspondingly larger.
-
-*TODO* Should this be on by default?
+**mustache** lambdas are off by default. (Not sure what that is? Read the [mustache](http://mustache.github.com/mustache.5.html) man page!) If you want them on, set the `lambda_support` option to true. This will include the raw template text as part of the compiled template; each template will be correspondingly larger. *TODO* Should this be on by default?
 
     HoganAssets::Config.configure do |config|
       config.lambda_support = true
+    end
+
+### Path Prefix
+
+You can strip a prefix from your template names. For example, when using Rails, if you place your templates in `app/assets/javascripts/app/templates` and organize them like Rails views (i.e. `posts/index.mustache`); then the `index.mustache` template gets compiled into:
+
+    HoganTemplates['app/templates/posts/index']
+
+You can strip the common part of the template name by setting the `path_prefix` option.  For example:
+
+    HoganAssets::Config.configure do |config|
+      config.path_prefix = 'app/templates'
+    end
+
+will give you a compiled template:
+
+    HoganTemplates['posts/index']
+
+*TODO* Can this be done in a nicer way?
+
+### Template Extensions
+
+By default, templates are recognized if they have an extension of `.mustache` (and if you have haml available, `.hamstache`.) You can change the template extensions by setting the `template_extensions` configuration option in an initializer:
+
+    HoganAssets::Config.configure do |config|
+      config.template_extensions = %w(mustache hamstache stache)
     end
 
 ## Usage
