@@ -15,6 +15,10 @@ module HoganAssets
       end.new
     end
 
+    def teardown
+      HoganAssets::Config.lambda_support = false
+    end
+
     def test_mime_type
       assert_equal 'application/javascript', HoganAssets::Tilt.default_mime_type
     end
@@ -42,7 +46,9 @@ module HoganAssets
     end
 
     def test_render_with_lambdas
-      HoganAssets::Config.lambda_support = true
+      HoganAssets::Config.configure do |config|
+        config.lambda_support = true
+      end
 
       scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.mustache'
 
