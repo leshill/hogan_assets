@@ -6,21 +6,30 @@ module HoganAssets
   # Or in a block:
   #
   # HoganAssets::Config.configure do |config|
-  #   config.template_extensions = ['mustache']
-  #   config.lambda_support = true
+  #   config.lambda_support = false
+  #   config.path_prefix = 'templates'
+  #   config.template_extensions = ['mustache', 'hamstache']
   # end
-
+  #
   module Config
     extend self
+
+    attr_writer :lambda_support, :path_prefix, :template_extensions
 
     def configure
       yield self
     end
 
-    attr_writer :lambda_support, :template_extensions
+    def haml_available?
+      defined? ::Haml::Engine
+    end
 
     def lambda_support?
       @lambda_support
+    end
+
+    def path_prefix
+      @path_prefix ||= 'templates'
     end
 
     def template_extensions
@@ -29,10 +38,6 @@ module HoganAssets
                                else
                                  ['mustache']
                                end
-    end
-
-    def haml_available?
-      defined? ::Haml::Engine
     end
   end
 end
