@@ -115,11 +115,12 @@ I made this because I <3 **mustache** and want to use it in Rails. Follow me on 
 
 # Contributors
 
-* @mdavidn     (Matthew Nelson)  :  Remove unnecessary template source
-* @ajacksified (Jack Lawson)     :  Configurable file extension
-* @mikesmullin (Mike Smullin)    :  hamstache support
-* @gleuch      (Greg Leuch)      :  Mustache lambdas
-* @lautis      (Ville Lautanala) :  hamstache fix
+* @mdavidn        (Matthew Nelson)  : Remove unnecessary template source
+* @ajacksified    (Jack Lawson)     : Configurable file extension
+* @mikesmullin    (Mike Smullin)    : hamstache support
+* @gleuch         (Greg Leuch)      : Mustache lambdas
+* @lautis         (Ville Lautanala) : hamstache fix
+* @adamstrickland (Adam Strickland) : Custom template namespace
 
 ## Contributing
 
