@@ -75,5 +75,20 @@ module HoganAssets
         this.HoganTemplates[\"template\"] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||\"\");t.b(\"This is \");t.b(t.v(t.f(\"mustache\",c,p,0)));return t.fl(); },partials: {}, subs: {  }}, "", Hogan, {});
       END_EXPECTED
     end
+
+    def test_template_namespace
+      HoganAssets::Config.configure do |config|
+        config.template_namespace = 'JST'
+      end
+
+      scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.mustache'
+
+      template = HoganAssets::Tilt.new(scope.s_path) { "This is {{mustache}}" }
+
+      assert_equal <<-END_EXPECTED, template.render(scope, {})
+        this.JST || (this.JST = {});
+        this.JST[\"path/to/template\"] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||\"\");t.b(\"This is \");t.b(t.v(t.f(\"mustache\",c,p,0)));return t.fl(); },partials: {}, subs: {  }}, "", Hogan, {});
+      END_EXPECTED
+    end
   end
 end
