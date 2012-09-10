@@ -14,7 +14,7 @@ module HoganAssets
   module Config
     extend self
 
-    attr_writer :lambda_support, :path_prefix, :template_extensions
+    attr_writer :lambda_support, :path_prefix, :template_extensions, :template_namespace
 
     def configure
       yield self
@@ -30,6 +30,10 @@ module HoganAssets
 
     def path_prefix
       @path_prefix ||= 'templates'
+    end
+
+    def template_namespace
+      @template_namespace ||= 'HoganTemplates'
     end
 
     def template_extensions

@@ -12,6 +12,7 @@ module HoganAssets
 
     def evaluate(scope, locals, &block)
       template_path = TemplatePath.new scope
+      template_namespace = HoganAssets::Config.template_namespace
 
       text = if template_path.is_hamstache?
         raise "Unable to complile #{template_path.full_path} because haml is not available. Did you add the haml gem?" unless HoganAssets::Config.haml_available?
@@ -26,8 +27,8 @@ module HoganAssets
       # Only emit the source template if we are using lambdas
       text = '' unless HoganAssets::Config.lambda_support?
       <<-TEMPLATE
-        this.HoganTemplates || (this.HoganTemplates = {});
-        this.HoganTemplates[#{template_path.name}] = new Hogan.Template(#{compiled_template}, #{text.inspect}, Hogan, {});
+        this.#{template_namespace} || (this.#{template_namespace} = {});
+        this.#{template_namespace}[#{template_path.name}] = new Hogan.Template(#{compiled_template}, #{text.inspect}, Hogan, {});
       TEMPLATE
     end
 
