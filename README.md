@@ -85,6 +85,16 @@ will give you a compiled template:
 
 *TODO* Can this be done in a nicer way?
 
+### Template namespace
+
+You can change the namespace for the generated templates. By default, the
+namespace is `HoganTemplates`. To change it, use the `template_namespace`
+option. For example:
+
+    HoganAssets::Config.configure do |config|
+      config.template_namespace = 'JST'
+    end
+
 ### Template Extensions
 
 By default, templates are recognized if they have an extension of `.mustache` (and if you have haml available, `.hamstache`.) You can change the template extensions by setting the `template_extensions` configuration option in an initializer:
