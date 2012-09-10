@@ -1,3 +1,7 @@
+## 1.3.3 (2012-09-10)
+
+* Use `HoganAssets::Config.template_namespace` to use a custom namespace for your templates - @adamstrickland
+
 ## 1.3.2 (2012-08-04)
 
 * Use `HoganAssets::Config.path_prefix` to strip a common path prefix from your template names
