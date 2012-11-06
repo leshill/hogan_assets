@@ -15,7 +15,7 @@ module HoganAssets
       template_namespace = HoganAssets::Config.template_namespace
 
       text = if template_path.is_hamstache?
-        raise "Unable to complile #{template_path.full_path} because haml is not available. Did you add the haml gem?" unless HoganAssets::Config.haml_available?
+        raise "Unable to compile #{template_path.full_path} because haml is not available. Did you add the haml gem?" unless HoganAssets::Config.haml_available?
         Haml::Engine.new(data, HoganAssets::Config.haml_options.merge(@options)).render
       else
         data
