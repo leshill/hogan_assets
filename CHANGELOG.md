@@ -1,3 +1,7 @@
+## 1.3.4 (2012-11-09)
+
+* Use `HoganAssets::Config.haml_options` to set options for `haml` - @lautis
+
 ## 1.3.3 (2012-09-10)
 
 * Use `HoganAssets::Config.template_namespace` to use a custom namespace for your templates - @adamstrickland

@@ -127,6 +127,7 @@ I made this because I <3 **mustache** and want to use it in Rails. Follow me on 
 * @gleuch         (Greg Leuch)      : Mustache lambdas
 * @lautis         (Ville Lautanala) : hamstache fix
 * @adamstrickland (Adam Strickland) : Custom template namespace
+* @lautis         (Ville Lautanala) : haml_options configuration
 
 ## Contributing
 
