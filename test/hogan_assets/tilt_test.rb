@@ -90,5 +90,14 @@ module HoganAssets
         this.JST[\"path/to/template\"] = new Hogan.Template({code: function (c,p,i) { var t=this;t.b(i=i||\"\");t.b(\"This is \");t.b(t.v(t.f(\"mustache\",c,p,0)));return t.fl(); },partials: {}, subs: {  }}, "", Hogan, {});
       END_EXPECTED
     end
+
+    def test_haml_options
+      HoganAssets::Config.configure do |config|
+        config.haml_options[:ugly] = true
+      end
+      scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.hamstache'
+      template = HoganAssets::Tilt.new(scope.s_path) { "%p\n  This is {{mustache}}" }
+      assert_match /\"This is "/, template.render(scope, {})
+    end
   end
 end

@@ -9,12 +9,13 @@ module HoganAssets
   #   config.lambda_support = false
   #   config.path_prefix = 'templates'
   #   config.template_extensions = ['mustache', 'hamstache']
+  #   config.haml_options[:ugly] = true
   # end
   #
   module Config
     extend self
 
-    attr_writer :lambda_support, :path_prefix, :template_extensions, :template_namespace
+    attr_writer :lambda_support, :path_prefix, :template_extensions, :template_namespace, :haml_options
 
     def configure
       yield self
@@ -42,6 +43,10 @@ module HoganAssets
                                else
                                  ['mustache']
                                end
+    end
+
+    def haml_options
+      @haml_options ||= {}
     end
   end
 end

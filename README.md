@@ -57,6 +57,12 @@ And then execute:
 
     $ bundle
 
+Hamstache compilation can be configured using [Haml options](http://haml.info/docs/yardoc/Haml/Options.html). For example:
+
+    HoganAssets::Config.configure do |config|
+      config.haml_options[:ugly] = true
+    end
+
 ## Configuration
 
 ### Lambda Support
