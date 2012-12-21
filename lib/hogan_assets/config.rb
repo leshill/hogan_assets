@@ -25,6 +25,10 @@ module HoganAssets
       defined? ::Haml::Engine
     end
 
+    def slim_available?
+      defined? ::Slim::Engine
+    end
+
     def lambda_support?
       @lambda_support
     end
