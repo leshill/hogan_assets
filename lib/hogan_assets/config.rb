@@ -8,7 +8,7 @@ module HoganAssets
   # HoganAssets::Config.configure do |config|
   #   config.lambda_support = false
   #   config.path_prefix = 'templates'
-  #   config.template_extensions = ['mustache', 'hamstache']
+  #   config.template_extensions = ['mustache', 'hamstache', 'slimstache']
   #   config.haml_options[:ugly] = true
   # end
   #
@@ -38,11 +38,7 @@ module HoganAssets
     end
 
     def template_extensions
-      @template_extensions ||= if haml_available?
-                                 ['mustache', 'hamstache']
-                               else
-                                 ['mustache']
-                               end
+      @template_extensions ||= "mustache#{' hamstache' if haml_available?}#{' slimstache' if slim_available?}".split
     end
 
     def haml_options

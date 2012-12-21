@@ -17,6 +17,9 @@ module HoganAssets
       text = if template_path.is_hamstache?
         raise "Unable to compile #{template_path.full_path} because haml is not available. Did you add the haml gem?" unless HoganAssets::Config.haml_available?
         Haml::Engine.new(data, HoganAssets::Config.haml_options.merge(@options)).render
+      elsif template_path.is_slimstache?
+        raise "Unable to compile #{template_path.full_path} because slim is not available. Did you add the slim gem?" unless HoganAssets::Config.haml_available?
+        Slim::Engine.new(data, HoganAssets::Config.haml_options.merge(@options)).render
       else
         data
       end
@@ -46,6 +49,10 @@ module HoganAssets
 
       def is_hamstache?
         full_path.to_s.end_with? '.hamstache'
+      end
+
+      def is_slimstache?
+        full_path.to_s.end_with? '.slimstache'
       end
 
       def name
