@@ -6,6 +6,7 @@ module HoganAssets
 
     def initialize_engine
       require_template_library 'haml'
+      require_template_library 'slim'
     rescue LoadError
       # haml not available
     end

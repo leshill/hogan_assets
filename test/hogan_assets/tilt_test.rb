@@ -99,5 +99,14 @@ module HoganAssets
       template = HoganAssets::Tilt.new(scope.s_path) { "%p\n  This is {{mustache}}" }
       assert_match /\"This is "/, template.render(scope, {})
     end
+
+    def test_slim_options
+      HoganAssets::Config.configure do |config|
+        config.slim_options[:pretty] = false
+      end
+      scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.slimstache'
+      template = HoganAssets::Tilt.new(scope.s_path) { "p This is {{mustache}}" }
+      assert_match /This is "/, template.render(scope, {})
+    end
   end
 end
