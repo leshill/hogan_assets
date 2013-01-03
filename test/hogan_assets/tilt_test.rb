@@ -97,7 +97,7 @@ module HoganAssets
       end
       scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.hamstache'
       template = HoganAssets::Tilt.new(scope.s_path) { "%p\n  This is {{mustache}}" }
-      assert_match /\"This is "/, template.render(scope, {})
+      assert_match /<p>/, template.render(scope, {})
     end
 
     def test_slim_options
@@ -106,7 +106,7 @@ module HoganAssets
       end
       scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.slimstache'
       template = HoganAssets::Tilt.new(scope.s_path) { "p This is {{mustache}}" }
-      assert_match /This is "/, template.render(scope, {})
+      assert_match /<p>/, template.render(scope, {})
     end
   end
 end
