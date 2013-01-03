@@ -63,6 +63,10 @@ Hamstache compilation can be configured using [Haml options](http://haml.info/do
       config.haml_options[:ugly] = true
     end
 
+## Slimstache!
+
+_slimstache_ is the also popular combination of `slim` and `mustache`. Works just like hamstache. Set the options via `slim_options`.
+
 ## Configuration
 
 ### Lambda Support
@@ -128,6 +132,7 @@ I made this because I <3 **mustache** and want to use it in Rails. Follow me on 
 * @lautis         (Ville Lautanala) : hamstache fix
 * @adamstrickland (Adam Strickland) : Custom template namespace
 * @lautis         (Ville Lautanala) : haml_options configuration
+* @sars           (Rodion)          : slimstache support
 
 ## Contributing
 

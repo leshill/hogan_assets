@@ -1,3 +1,8 @@
+## 1.4.0 (2013-1-02)
+
+* **slimstache** support, use `HoganAssets::Config.slim_options` to set options for `slim` - @sars
+* Silence tilt require warning
+
 ## 1.3.4 (2012-11-09)
 
 * Use `HoganAssets::Config.haml_options` to set options for `haml` - @lautis
