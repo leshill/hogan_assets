@@ -5,10 +5,8 @@ module HoganAssets
     self.default_mime_type = 'application/javascript'
 
     def initialize_engine
-      require_template_library 'haml'
-      require_template_library 'slim'
-    rescue LoadError
-      # haml not available
+      load_haml
+      load_slim
     end
 
     def evaluate(scope, locals, &block)
@@ -37,6 +35,18 @@ module HoganAssets
     end
 
     protected
+
+    def load_haml
+      require 'haml'
+    rescue LoadError
+      # haml not available
+    end
+
+    def load_slim
+      require 'slim'
+    rescue LoadError
+      # slim not available
+    end
 
     def prepare; end
 
