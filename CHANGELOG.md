@@ -1,3 +1,7 @@
+## 1.5.0 (2013-2-06)
+
+* YAML configuration support - @apai4
+
 ## 1.4.0 (2013-1-02)
 
 * **slimstache** support, use `HoganAssets::Config.slim_options` to set options for `slim` - @sars
