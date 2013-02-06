@@ -1,0 +1,5 @@
+test:
+  template_extensions:
+    - 'custom'
+  haml_options:
+    ugly: true
