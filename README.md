@@ -69,6 +69,8 @@ _slimstache_ is the also popular combination of `slim` and `mustache`. Works jus
 
 ## Configuration
 
+You can configure options using either an intializer or with a YAML file (`config/hogan_assets.yml`). See `lib/hogan_assets/config.rb` for details.
+
 ### Lambda Support
 
 **mustache** lambdas are off by default. (Not sure what that is? Read the [mustache](http://mustache.github.com/mustache.5.html) man page!) If you want them on, set the `lambda_support` option to true. This will include the raw template text as part of the compiled template; each template will be correspondingly larger. *TODO* Should this be on by default?
@@ -113,6 +115,7 @@ By default, templates are recognized if they have an extension of `.mustache` (a
       config.template_extensions = %w(mustache hamstache stache)
     end
 
+
 ## Usage
 
 Templates are compiled to a global JavaScript object named `HoganTemplates`. To render `pages/person`:
@@ -133,6 +136,7 @@ I made this because I <3 **mustache** and want to use it in Rails. Follow me on 
 * @adamstrickland (Adam Strickland) : Custom template namespace
 * @lautis         (Ville Lautanala) : haml_options configuration
 * @sars           (Rodion)          : slimstache support
+* @apai4                            : YAML configuration
 
 ## Contributing
 
