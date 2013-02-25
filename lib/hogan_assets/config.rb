@@ -38,7 +38,8 @@ module HoganAssets
   module Config
     extend self
 
-    attr_writer :env, :lambda_support, :path_prefix, :template_extensions, :template_namespace, :haml_options, :slim_options
+    attr_writer :env, :lambda_support, :path_prefix, :template_extensions, :template_namespace, :haml_options, :slim_options,
+                :slimstache_extensions, :hamstache_extensions
 
     def configure
       yield self
@@ -73,6 +74,8 @@ module HoganAssets
       @template_namespace  = yml['template_namespace'] if yml.has_key? 'template_namespace'
       @haml_options        = yml['haml_options'] if yml.has_key? 'haml_options'
       @slim_options        = yml['slim_options'] if yml.has_key? 'slim_options'
+      @slimstache_extensions  = yml['slimstache_extensions'] if yml.has_key? 'slimstache_extensions'
+      @hamstache_extensions   = yml['hamstache_extensions'] if yml.has_key? 'hamstache_extensions'
       symbolize(@haml_options) if @haml_options
       symbolize(@slim_options) if @slim_options
     end
@@ -95,6 +98,14 @@ module HoganAssets
 
     def template_extensions
       @template_extensions ||= "mustache#{' hamstache' if haml_available?}#{' slimstache' if slim_available?}".split
+    end
+
+    def hamstache_extensions
+      @hamstache_extensions ||= ['hamstache']
+    end
+
+    def slimstache_extensions
+      @slimstache_extensions ||= ['slimstache']
     end
 
     def yml

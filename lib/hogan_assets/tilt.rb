@@ -59,11 +59,13 @@ module HoganAssets
       end
 
       def is_hamstache?
-        full_path.to_s.end_with? '.hamstache'
+        file_path = full_path.to_s
+        HoganAssets::Config.hamstache_extensions.any? { |ext| file_path.to_s.end_with? ext }
       end
 
       def is_slimstache?
-        full_path.to_s.end_with? '.slimstache'
+        file_path = full_path.to_s
+        HoganAssets::Config.slimstache_extensions.any? { |ext| file_path.to_s.end_with? ext }
       end
 
       def name
