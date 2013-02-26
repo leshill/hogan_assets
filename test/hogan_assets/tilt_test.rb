@@ -82,8 +82,9 @@ module HoganAssets
     def test_haml_options
       HoganAssets::Config.configure do |config|
         config.haml_options[:ugly] = true
+        config.hamstache_extensions = ['hamlhbs']
       end
-      scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.hamstache'
+      scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.hamlhbs'
       template = HoganAssets::Tilt.new(scope.s_path) { "%p\n  This is {{mustache}}" }
       assert_match /<p>/, template.render(scope, {})
     end
@@ -91,8 +92,9 @@ module HoganAssets
     def test_slim_options
       HoganAssets::Config.configure do |config|
         config.slim_options[:pretty] = false
+        config.slimstache_extensions = ['slimhbs']
       end
-      scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.slimstache'
+      scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.slimhbs'
       template = HoganAssets::Tilt.new(scope.s_path) { "p This is {{mustache}}" }
       assert_match /<p>/, template.render(scope, {})
     end
