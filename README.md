@@ -63,9 +63,15 @@ Hamstache compilation can be configured using [Haml options](http://haml.info/do
       config.haml_options[:ugly] = true
     end
 
+You can configure which recognized as _hamstache_. For example:
+
+    HoganAssets::Config.configure do |config|
+      config.hamstache_extensions = %w(hamstache hamlhbs)
+    end
+
 ## Slimstache!
 
-_slimstache_ is the also popular combination of `slim` and `mustache`. Works just like hamstache. Set the options via `slim_options`.
+_slimstache_ is the also popular combination of `slim` and `mustache`. Works just like hamstache above.
 
 ## Configuration
 
@@ -137,6 +143,7 @@ I made this because I <3 **mustache** and want to use it in Rails. Follow me on 
 * @lautis         (Ville Lautanala) : haml_options configuration
 * @sars           (Rodion)          : slimstache support
 * @apai4                            : YAML configuration
+* @AlexRiedler    (Alex Riedler)    : hamstache/slimstache extensions and helper support
 
 ## Contributing
 
