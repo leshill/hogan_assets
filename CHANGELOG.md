@@ -1,3 +1,8 @@
+## 1.5.1 (2013-2-26)
+
+* hamstache\_extensions and slimstache\_extensions options - @AlexRiedler
+* pass scope and locals to `haml` and `slim` - @AlexRiedler
+
 ## 1.5.0 (2013-2-06)
 
 * YAML configuration support - @apai4
