@@ -2,6 +2,15 @@ require 'hogan_assets'
 
 require 'test/unit'
 
+module HoganAssets::Config
+  def reset!
+    %w(env lambda_support path_prefix template_extensions template_namespace haml_options slim_options slimstache_extensions hamstache_extensions).each do |option|
+      send "#{option}=", nil
+    end
+
+
+  end
+end
 module TestSupport
   # Try to act like sprockets.
   def make_scope(root, file)

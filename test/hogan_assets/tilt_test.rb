@@ -5,8 +5,7 @@ module HoganAssets
     include TestSupport
 
     def teardown
-      HoganAssets::Config.lambda_support = false
-      HoganAssets::Config.path_prefix = 'templates'
+      HoganAssets::Config.reset!
     end
 
     def test_mime_type
