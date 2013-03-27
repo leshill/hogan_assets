@@ -1,4 +1,4 @@
-/*
+/*!
  *  Copyright 2011 Twitter, Inc.
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ var Hogan = {};
     codeObj = codeObj || {};
     this.r = codeObj.code || this.r;
     this.c = compiler;
-    this.options = options;
+    this.options = options || {};
     this.text = text || '';
     this.partials = codeObj.partials || {};
     this.subs = codeObj.subs || {};
@@ -73,14 +73,18 @@ var Hogan = {};
       this.partials[symbol].base = template;
 
       if (partial.subs) {
-        template = createSpecializedPartial(template, partial.subs, partial.partials);
-      }
-
+        // Make sure we consider parent template now
+        if (this.activeSub === undefined) {
+          // Store parent template text in partials.stackText to perform substitutions in child templates correctly
+          partials.stackText  = this.text;
+        }
+         template = createSpecializedPartial(template, partial.subs, partial.partials, partials.stackText || this.text);
+       }
       this.partials[symbol].instance = template;
       return template;
     },
 
-    // tries to find a partial in the curent scope and render it
+    // tries to find a partial in the current scope and render it
     rp: function(symbol, context, partials, indent) {
       var partial = this.ep(symbol, partials);
       if (!partial) {
@@ -118,7 +122,7 @@ var Hogan = {};
         val = this.ms(val, ctx, partials, inverted, start, end, tags);
       }
 
-      pass = (val === '') || !!val;
+      pass = !!val;
 
       if (!inverted && pass && ctx) {
         ctx.push((typeof val == 'object') ? val : ctx[ctx.length - 1]);
@@ -129,20 +133,23 @@ var Hogan = {};
 
     // find values with dotted names
     d: function(key, ctx, partials, returnFound) {
-      var names = key.split('.'),
+      var found,
+          names = key.split('.'),
           val = this.f(names[0], ctx, partials, returnFound),
+          doModelGet = this.options.modelGet,
           cx = null;
 
       if (key === '.' && isArray(ctx[ctx.length - 2])) {
-        return ctx[ctx.length - 1];
-      }
-
-      for (var i = 1; i < names.length; i++) {
-        if (val && typeof val == 'object' && val[names[i]] != null) {
-          cx = val;
-          val = val[names[i]];
-        } else {
-          val = '';
+        val = ctx[ctx.length - 1];
+      } else {
+        for (var i = 1; i < names.length; i++) {
+          found = findInScope(names[i], val, doModelGet);
+          if (found != null) {
+            cx = val;
+            val = found;
+          } else {
+            val = '';
+          }
         }
       }
 
@@ -163,12 +170,13 @@ var Hogan = {};
     f: function(key, ctx, partials, returnFound) {
       var val = false,
           v = null,
-          found = false;
+          found = false,
+          doModelGet = this.options.modelGet;
 
       for (var i = ctx.length - 1; i >= 0; i--) {
         v = ctx[i];
-        if (v && typeof v == 'object' && v[key] != null) {
-          val = v[key];
+        val = findInScope(key, v, doModelGet);
+        if (val != null) {
           found = true;
           break;
         }
@@ -217,14 +225,16 @@ var Hogan = {};
 
     // method replace section
     ms: function(func, ctx, partials, inverted, start, end, tags) {
-      var cx = ctx[ctx.length - 1],
+      var textSource,
+          cx = ctx[ctx.length - 1],
           result = func.call(cx);
 
       if (typeof result == 'function') {
         if (inverted) {
           return true;
         } else {
-          return this.ls(result, cx, partials, this.text.substring(start, end), tags);
+          textSource = (this.activeSub && this.subsText[this.activeSub]) ? this.subsText[this.activeSub] : this.text;
+          return this.ls(result, cx, partials, textSource.substring(start, end), tags);
         }
       }
 
@@ -246,13 +256,33 @@ var Hogan = {};
     sub: function(name, context, partials, indent) {
       var f = this.subs[name];
       if (f) {
+        this.activeSub = name;
         f(context, partials, this, indent);
+        this.activeSub = false;
       }
     }
 
   };
 
-  function createSpecializedPartial(instance, subs, partials) {
+  //Find a key in an object
+  function findInScope(key, scope, doModelGet) {
+    var val, checkVal;
+
+    if (scope && typeof scope == 'object') {
+
+      if (scope[key] != null) {
+        val = scope[key];
+
+      // try lookup with get for backbone or similar model data
+      } else if (doModelGet && scope.get && typeof scope.get == 'function') {
+        val = scope.get(key);
+      }
+    }
+
+    return val;
+  }
+
+  function createSpecializedPartial(instance, subs, partials, childText) {
     function PartialTemplate() {};
     PartialTemplate.prototype = instance;
     function Substitutions() {};
@@ -260,10 +290,12 @@ var Hogan = {};
     var key;
     var partial = new PartialTemplate();
     partial.subs = new Substitutions();
+    partial.subsText = {};  //hehe. substext.
     partial.ib();
 
     for (key in subs) {
       partial.subs[key] = subs[key];
+      partial.subsText[key] = childText;
     }
 
     for (key in partials) {
@@ -276,9 +308,9 @@ var Hogan = {};
   var rAmp = /&/g,
       rLt = /</g,
       rGt = />/g,
-      rApos =/\'/g,
+      rApos = /\'/g,
       rQuot = /\"/g,
-      hChars =/[&<>\"\']/;
+      hChars = /[&<>\"\']/;
 
   function coerceToString(val) {
     return String((val === null || val === undefined) ? '' : val);
@@ -288,10 +320,10 @@ var Hogan = {};
     str = coerceToString(str);
     return hChars.test(str) ?
       str
-        .replace(rAmp,'&amp;')
-        .replace(rLt,'&lt;')
-        .replace(rGt,'&gt;')
-        .replace(rApos,'&#39;')
+        .replace(rAmp, '&amp;')
+        .replace(rLt, '&lt;')
+        .replace(rGt, '&gt;')
+        .replace(rApos, '&#39;')
         .replace(rQuot, '&quot;') :
       str;
   }
@@ -385,7 +417,7 @@ var Hogan = {};
           ).split(' ');
 
       otag = delimiters[0];
-      ctag = delimiters[1];
+      ctag = delimiters[delimiters.length - 1];
 
       return closeIndex + close.length - 1;
     }
@@ -671,7 +703,7 @@ var Hogan = {};
     return 't.b(' + s + ');';
   }
 
-  Hogan.walk = function (nodelist, context) {
+  Hogan.walk = function(nodelist, context) {
     var func;
     for (var i = 0, l = nodelist.length; i < l; i++) {
       func = Hogan.codegen[nodelist[i].tag];
@@ -683,13 +715,13 @@ var Hogan = {};
   Hogan.parse = function(tokens, text, options) {
     options = options || {};
     return buildTree(tokens, '', [], options.sectionTags || []);
-  },
+  }
 
   Hogan.cache = {};
 
   Hogan.cacheKey = function(text, options) {
-    return [text, !!options.asString, !!options.disableLambda].join('||');
-  },
+    return [text, !!options.asString, !!options.disableLambda, options.delimiters, !!options.modelGet].join('||');
+  }
 
   Hogan.compile = function(text, options) {
     options = options || {};
@@ -702,6 +734,6 @@ var Hogan = {};
 
     template = this.generate(this.parse(this.scan(text, options.delimiters), text, options), text, options);
     return this.cache[key] = template;
-  };
+  }
 })(typeof exports !== 'undefined' ? exports : Hogan);
 
