@@ -1,3 +1,7 @@
+## 1.6.0 (2013-03-27)
+
+* Update to `hogan.js` as of this [commit](https://github.com/twitter/hogan.js/commit/9a9eb1ab8fbbfedc9de73aeac4f9c1798d190a21)
+
 ## 1.5.1 (2013-2-26)
 
 * hamstache\_extensions and slimstache\_extensions options - @AlexRiedler
