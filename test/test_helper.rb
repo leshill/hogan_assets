@@ -11,7 +11,16 @@ module HoganAssets::Config
 
   end
 end
+
 module TestSupport
+  def compiled_template(text)
+    HoganAssets::Hogan.compile(text)
+  end
+
+  def haml_compiled(scope, text)
+    Haml::Engine.new(text, HoganAssets::Config.haml_options.merge(@options)).render(scope, {})
+  end
+
   # Try to act like sprockets.
   def make_scope(root, file)
     Class.new do
