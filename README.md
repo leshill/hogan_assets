@@ -128,9 +128,13 @@ Templates are compiled to a global JavaScript object named `HoganTemplates`. To 
 
     HoganTemplates['templates/pages/person'].render(context, partials);
 
+# Maintainer
+
+This gem is maintained by Alex Riedler [Github](https://github.com/AlexRiedler).
+
 # Author
 
-I made this because I <3 **mustache** and want to use it in Rails. Follow me on [Github](https://github.com/leshill) and [Twitter](https://twitter.com/leshill).
+Les Hill, follow me on [Github](https://github.com/leshill) and [Twitter](https://twitter.com/leshill).
 
 # Contributors
 
