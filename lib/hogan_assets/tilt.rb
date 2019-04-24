@@ -15,16 +15,15 @@ module HoganAssets
 
       text = if template_path.is_hamstache?
         raise "Unable to compile #{template_path.full_path} because haml is not available. Did you add the haml gem?" unless HoganAssets::Config.haml_available?
-        Haml::Engine.new(data, HoganAssets::Config.haml_options.merge(@options)).render(scope, locals)
+        ::Haml::Engine.new(data, HoganAssets::Config.haml_options.merge(@options)).render(scope, locals)
       elsif template_path.is_slimstache?
         raise "Unable to compile #{template_path.full_path} because slim is not available. Did you add the slim gem?" unless HoganAssets::Config.slim_available?
-        Slim::Template.new(HoganAssets::Config.slim_options.merge(@options)) { data }.render(scope, locals)
+        ::Slim::Template.new(HoganAssets::Config.slim_options.merge(@options)) { data }.render(scope, locals)
       else
         data
       end
 
       compiled_template = Hogan.compile(text)
-      template_name = scope.logical_path.inspect
 
       # Only emit the source template if we are using lambdas
       text = '' unless HoganAssets::Config.lambda_support?

@@ -28,8 +28,8 @@ module HoganAssets
     def test_yaml_options
       scope = make_scope '/myapp/app/assets/javascripts', 'path/to/template.custom'
       template = HoganAssets::Tilt.new(scope.s_path) { "This is {{mustache}}" }
-      assert_match /This is/, template.render(scope, {})
-      assert_equal HoganAssets::Config.haml_options, ugly: true
+      assert_match(/This is/, template.render(scope, {}))
+      assert_equal(HoganAssets::Config.haml_options, ugly: true)
     end
   end
 end

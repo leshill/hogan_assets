@@ -1,5 +1,6 @@
 require 'hogan_assets/version'
 require 'hogan_assets/config'
+require 'hogan_assets/transformer'
 
 module HoganAssets
   extend Config
@@ -12,8 +13,9 @@ module HoganAssets
   else
     require 'sprockets'
     Config.load_yml! if Config.yml_exists?
+
     Config.template_extensions.each do |ext|
-      Sprockets.register_engine ".#{ext}", Tilt
+      Transformer.register(Sprockets, ext)
     end
   end
 end

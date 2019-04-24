@@ -19,7 +19,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "tilt", ">= 1.3.3"
   gem.add_runtime_dependency "sprockets", ">= 2.0.3"
 
-  gem.add_development_dependency "debugger"
   gem.add_development_dependency "haml"
   gem.add_development_dependency "slim"
 end
