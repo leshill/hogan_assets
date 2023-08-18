@@ -1,5 +1,8 @@
 # HoganAssets
 
+Note: This is a fork of a repo that stopped being maitained [leshill/hogan_assets](https://github.com/leshill/hogan_assets)
+Only small changes have been implemented on the fork to support newer sprockets but the original intent remains
+
 **HoganAssets** compiles your [mustache](http://mustache.github.com/) templates with [hogan.js](http://twitter.github.com/hogan.js/) on **sprockets** and the Rails asset pipeline.
 
 **hogan.js** is a templating engine developed at [Twitter](http://twitter.com) that follows the **mustache** spec and compiles the templates to JavaScript. The first bit is *cool*, since **mustache** is *cool*. The second bit is **awesome and full of win** because we can now compile our **mustache** templates on the server using the asset pipeline/sprockets.
