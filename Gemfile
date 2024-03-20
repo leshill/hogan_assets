@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in hogan_assets.gemspec
 gemspec
+
+gem 'haml', '~> 5.0'
+gem 'slim', '~> 5.0'

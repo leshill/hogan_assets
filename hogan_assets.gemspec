@@ -18,7 +18,6 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency "execjs", ">= 1.2.9"
   gem.add_runtime_dependency "tilt", ">= 1.3.3"
   gem.add_runtime_dependency "sprockets", ">= 2.0.3"
-
-  gem.add_development_dependency "haml"
-  gem.add_development_dependency "slim"
+  # primary user of this gem is not able to use rack 3 yet
+  gem.add_runtime_dependency "rack", "< 3.0"
 end
